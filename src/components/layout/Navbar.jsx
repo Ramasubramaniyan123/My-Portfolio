@@ -47,48 +47,51 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'nav-blur shadow-lg' : 'bg-transparent'
+        isScrolled ? 'nav-blur shadow-sm' : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0 transition-transform duration-300 hover:scale-[1.03]">
             <button
               type="button"
-              className="text-xl font-bold text-text-primary cursor-pointer"
+              className="text-2xl font-bold text-text-primary cursor-pointer"
               onClick={() => handleNavClick('#home')}
               aria-label="Go to home"
             >
               <span className="font-extrabold tracking-wide">
-                R<span className="text-accent">K</span>
+                R<span className="text-primary">K</span>
               </span>
             </button>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
-            <div className="flex items-center space-x-8">
+            <div className="flex items-center space-x-10">
               {navItems.map((item) => (
                 <button
                   key={item.name}
                   onClick={() => handleNavClick(item.href)}
-                  className={`text-sm font-medium transition-colors duration-200 ${
+                  className={`relative py-2 text-sm font-semibold transition-colors duration-250 ${
                     activeSection === item.href.slice(1)
-                      ? 'text-accent'
-                      : 'text-text-secondary hover:text-text-primary'
+                      ? 'text-primary'
+                      : 'text-text-secondary hover:text-secondary'
                   }`}
                 >
                   {item.name}
+                  {activeSection === item.href.slice(1) && (
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary animate-fade-in" />
+                  )}
                 </button>
               ))}
             </div>
           </div>
 
           {/* Right Section */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-6">
             {/* Social Links - Desktop */}
-            <div className="hidden md:flex items-center space-x-3">
+            <div className="hidden md:flex items-center space-x-5">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
@@ -96,9 +99,9 @@ const Navbar = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="text-text-muted hover:text-accent transition-all duration-300 hover:rotate-[15deg]"
+                  className="text-text-secondary hover:text-secondary transition-all duration-250 hover:rotate-[12deg] hover:scale-110"
                 >
-                  <social.icon size={18} />
+                  <social.icon size={20} />
                 </a>
               ))}
             </div>
@@ -106,9 +109,9 @@ const Navbar = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden text-text-muted hover:text-accent transition-colors"
+              className="md:hidden text-text-secondary hover:text-primary transition-colors"
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
@@ -116,23 +119,23 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-primary/95 backdrop-blur-md border-t border-border">
-          <div className="px-4 py-6 space-y-4">
+        <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-border shadow-xl">
+          <div className="px-6 py-8 space-y-6">
             {navItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => handleNavClick(item.href)}
-                className={`block w-full text-left text-sm font-medium transition-colors duration-200 ${
+                className={`block w-full text-left text-base font-semibold transition-colors duration-250 ${
                   activeSection === item.href.slice(1)
-                    ? 'text-accent-primary'
-                    : 'text-text-secondary hover:text-text-primary'
+                    ? 'text-primary'
+                    : 'text-text-secondary hover:text-secondary'
                 }`}
               >
                 {item.name}
               </button>
             ))}
             
-            <div className="flex items-center space-x-4 pt-4 border-t border-border">
+            <div className="flex items-center space-x-6 pt-6 border-t border-border">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
@@ -140,9 +143,9 @@ const Navbar = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="text-text-muted hover:text-accent-primary transition-all duration-300 hover:rotate-[15deg]"
+                  className="text-text-secondary hover:text-secondary transition-all duration-250 hover:rotate-[12deg]"
                 >
-                  <social.icon size={18} />
+                  <social.icon size={24} />
                 </a>
               ))}
             </div>

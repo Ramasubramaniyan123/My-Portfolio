@@ -1,80 +1,62 @@
 import React from 'react';
-import { Code, Database, Layers, Wrench, Users } from 'lucide-react';
 import SectionTitle from '../components/ui/SectionTitle';
-import Card from '../components/ui/Card';
 import { skillsData } from '../data/skills.data';
 
 const Skills = () => {
   const technicalCategories = [
-    { key: 'programming', title: 'Programming', icon: Code },
-    { key: 'backend', title: 'Backend', icon: Database },
-    { key: 'coreConcepts', title: 'Core Concepts', icon: Layers },
-    { key: 'tools', title: 'Tools', icon: Wrench },
+    { key: 'programming', title: 'Programming' },
+    { key: 'backend', title: 'Backend' },
+    { key: 'coreConcepts', title: 'Core Concepts' },
+    { key: 'tools', title: 'Tools' },
   ];
 
   return (
-    <section id="skills" className="py-20">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+    <section id="skills" className="section-padding bg-background">
+      <div className="max-w-[1400px] mx-auto container-padding">
         <SectionTitle
           title="Skills"
           subtitle="Backend-focused technical strengths and professional soft skills"
           className="mb-16"
         />
 
-        <div className="space-y-12">
-          {/* Technical Skills */}
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-xl font-semibold text-text-primary">Technical Skills</h3>
-              <p className="text-sm text-text-secondary mt-1">Java backend, APIs, and core engineering fundamentals.</p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24">
+          {/* LEFT SIDE: TECHNICAL SKILLS */}
+          <div className="space-y-10">
+            <div className="inline-block border-l-4 border-primary pl-4">
+              <h3 className="text-2xl font-bold text-text-primary tracking-tight">Technical Skills</h3>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {technicalCategories.map((category, index) => (
-                <Card key={category.key} delay={index * 0.05} className="h-full group">
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-lg bg-secondary border border-border group-hover:border-accent-primary transition-colors duration-300">
-                        <category.icon size={18} className="text-accent-primary transition-transform duration-300 group-hover:rotate-[15deg] group-hover:scale-110" />
-                      </div>
-                      <h4 className="text-base font-semibold text-text-primary">{category.title}</h4>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2">
-                      {skillsData.technical[category.key].map((skill) => (
-                        <span
-                          key={skill}
-                          className="text-xs px-3 py-1 rounded-full bg-secondary border border-border text-text-secondary transition-all duration-300 group-hover:border-accent-primary/60"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </Card>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {technicalCategories.map((category) => (
+                <div key={category.key} className="space-y-4">
+                  <h4 className="text-lg font-bold text-text-primary">{category.title}</h4>
+                  <ul className="space-y-2">
+                    {skillsData.technical[category.key].map((skill) => (
+                      <li key={skill} className="flex items-center text-text-secondary">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary mr-3" />
+                        <span className="text-base font-medium">{skill}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Soft Skills */}
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-xl font-semibold text-text-primary">Soft Skills</h3>
-              <p className="text-sm text-text-secondary mt-1">How I collaborate, communicate, and execute.</p>
+          {/* RIGHT SIDE: SOFT SKILLS */}
+          <div className="space-y-10">
+            <div className="inline-block border-l-4 border-secondary pl-4">
+              <h3 className="text-2xl font-bold text-text-primary tracking-tight">Soft Skills</h3>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {skillsData.soft.map((skill, index) => (
-                <Card key={skill} delay={index * 0.03} className="group">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-lg bg-secondary border border-border group-hover:border-accent-secondary transition-colors duration-300">
-                        <Users size={16} className="text-accent-secondary transition-transform duration-300 group-hover:rotate-[15deg] group-hover:scale-110" />
-                      </div>
-                      <div className="text-sm font-semibold text-text-primary">{skill}</div>
-                    </div>
-                  </div>
-                </Card>
+            <div className="flex flex-wrap gap-3">
+              {skillsData.soft.map((skill) => (
+                <div
+                  key={skill}
+                  className="px-5 py-2.5 rounded-full bg-background border border-border text-text-primary font-semibold text-sm transition-all duration-250 hover:bg-primary/10 hover:border-primary hover:scale-[1.02] cursor-default"
+                >
+                  {skill}
+                </div>
               ))}
             </div>
           </div>

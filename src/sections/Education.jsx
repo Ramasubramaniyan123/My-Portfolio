@@ -64,7 +64,7 @@ const Education = () => {
           <div className="hidden md:block absolute left-8 top-24 bottom-0 w-0.5 bg-gradient-to-b from-accent-primary/40 to-transparent" />
         )}
 
-        <Card className={`relative ${isLatest ? 'border-accent-primary/30 bg-secondary/30' : ''}`}>
+        <Card className={`relative ${isLatest ? 'border-accent-primary/30 bg-background' : ''}`}>
           {/* Timeline Dot */}
           <div className="absolute -left-12 top-8 hidden md:block">
             <div
@@ -150,7 +150,7 @@ const Education = () => {
   };
 
   return (
-    <section id="education" className="section-padding bg-secondary/30">
+    <section id="education" className="section-padding bg-background">
       <div className="max-w-7xl mx-auto container-padding">
         <SectionTitle
           title="Education"

@@ -71,69 +71,59 @@ const LeetCode = () => {
     };
   }, [leetCodeApiUrl]);
 
-  // Manually editable monthly tracker
-  const monthlyTracker = useMemo(() => ([
-    { month: 'January', solved: 40 },
-    { month: 'February', solved: 35 },
-    { month: 'March', solved: 50 },
-  ]), []);
-
-  const maxSolvedInMonth = Math.max(...monthlyTracker.map(m => m.solved), 1);
-
   const statsCards = [
-    { key: 'totalSolved', label: 'Total Solved', icon: Hash, accent: 'text-accent-primary', border: 'border-accent-primary/30', bg: 'bg-accent-primary/10' },
-    { key: 'easy', label: 'Easy', icon: Target, accent: 'text-text-secondary', border: 'border-border', bg: 'bg-secondary' },
-    { key: 'medium', label: 'Medium', icon: TrendingUp, accent: 'text-accent-secondary', border: 'border-accent-secondary/30', bg: 'bg-accent-secondary/10' },
-    { key: 'hard', label: 'Hard', icon: Trophy, accent: 'text-accent-primary', border: 'border-accent-primary/30', bg: 'bg-accent-primary/10' },
-    { key: 'ranking', label: 'Ranking', icon: User, accent: 'text-text-secondary', border: 'border-border', bg: 'bg-secondary' },
+    { key: 'totalSolved', label: 'Total Solved', icon: Hash, accent: 'text-primary', border: 'border-border', bg: 'bg-white' },
+    { key: 'easy', label: 'Easy', icon: Target, accent: 'text-green-600', border: 'border-green-100', bg: 'bg-green-50' },
+    { key: 'medium', label: 'Medium', icon: TrendingUp, accent: 'text-gray-600', border: 'border-gray-100', bg: 'bg-gray-50' },
+    { key: 'hard', label: 'Hard', icon: Trophy, accent: 'text-red-600', border: 'border-red-100', bg: 'bg-red-50' },
+    { key: 'ranking', label: 'Ranking', icon: User, accent: 'text-secondary', border: 'border-secondary/30', bg: 'bg-white' },
   ];
 
   return (
-    <section id="leetcode" className="section-padding bg-secondary/30">
-      <div className="max-w-7xl mx-auto container-padding">
+    <section id="leetcode" className="section-padding bg-background">
+      <div className="max-w-[1400px] mx-auto container-padding">
         <SectionTitle
           title="LeetCode"
           subtitle="A structured snapshot of my problem-solving progress"
           className="mb-16"
         />
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           {/* Dashboard */}
-          <Card className="p-8 md:p-12">
-            <div className="space-y-8">
+          <div className="bg-white rounded-2xl border border-border p-8 md:p-12 shadow-sm">
+            <div className="space-y-10">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                <div className="flex items-center gap-4">
-                  <div className="inline-flex p-3 rounded-xl bg-accent-primary/10 border border-accent-primary/30">
-                    <Code className="w-7 h-7 text-accent-primary" />
+                <div className="flex items-center gap-5">
+                  <div className="inline-flex p-3 rounded-xl bg-primary/10 border border-primary/20">
+                    <Code className="w-8 h-8 text-primary" />
                   </div>
                   <div>
                     <h3 className="text-2xl md:text-3xl font-bold text-text-primary">LeetCode Dashboard</h3>
-                    <p className="text-text-secondary text-sm mt-1">Real-time stats (auto-updated).</p>
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Button
-                    onClick={() => { window.location.href = leetCodeProfileUrl; }}
-                    className="group"
-                    type="button"
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a
+                    href={leetCodeProfileUrl}
+                    target="_self"
+                    className="btn-primary flex items-center justify-center"
                   >
-                    View Full LeetCode Profile
-                  </Button>
+                    View LeetCode Profile
+                  </a>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
                 {statsCards.map((stat) => (
                   <div
                     key={stat.key}
-                    className={`group rounded-xl border ${stat.border} ${stat.bg} p-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-black/30 hover:border-accent-primary`}
+                    className={`group rounded-xl border ${stat.border} ${stat.bg} p-5 transition-all duration-250 hover:shadow-md ${stat.key === 'ranking' ? 'border-secondary border-2' : ''}`}
                   >
                     <div className="flex items-center justify-between">
-                      <div className="text-xs text-text-secondary">{stat.label}</div>
-                      <stat.icon className={`w-4 h-4 ${stat.accent} transition-transform duration-300 group-hover:rotate-[15deg] group-hover:scale-110`} />
+                      <div className="text-sm font-semibold text-text-secondary">{stat.label}</div>
+                      <stat.icon className={`w-5 h-5 ${stat.accent} transition-transform duration-250 group-hover:rotate-[12deg] group-hover:scale-110`} />
                     </div>
-                    <div className="mt-2 text-xl font-bold text-text-primary">
+                    <div className="mt-3 text-2xl font-bold text-text-primary">
                       {leetCodeStats.loading ? '…' : (leetCodeStats[stat.key] ?? '—')}
                     </div>
                   </div>
@@ -141,54 +131,16 @@ const LeetCode = () => {
               </div>
 
               {leetCodeStats.error && (
-                <div className="rounded-xl border border-border bg-secondary/40 p-4">
-                  <div className="text-sm text-text-secondary">
+                <div className="rounded-xl border border-red-100 bg-red-50 p-4">
+                  <div className="text-sm text-red-600 font-medium">
                     Unable to load live stats right now.
-                    <span className="ml-2 text-text-secondary/80">({leetCodeStats.error})</span>
+                    <span className="ml-2 opacity-80">({leetCodeStats.error})</span>
                   </div>
                 </div>
               )}
 
-              <div className="rounded-xl border border-border bg-secondary/40 p-4">
-                <div className="text-sm text-text-secondary">
-                  Profile:
-                  <a
-                    href={leetCodeProfileUrl}
-                    target="_self"
-                    className="ml-2 text-accent-primary hover:underline"
-                  >
-                    {leetCodeProfileUrl}
-                  </a>
-                </div>
-              </div>
-
-              {/* Monthly Tracker */}
-              <div className="space-y-4">
-                <div>
-                  <h4 className="text-lg font-semibold text-text-primary">Monthly Tracker</h4>
-                  <p className="text-sm text-text-secondary mt-1">Manually editable monthly solved count.</p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {monthlyTracker.map((m) => (
-                    <div key={m.month} className="rounded-xl border border-border bg-secondary/30 p-4">
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="text-sm font-semibold text-text-primary">{m.month}</div>
-                        <div className="text-sm text-text-secondary">{m.solved} problems</div>
-                      </div>
-
-                      <div className="h-2 w-full bg-card rounded-full overflow-hidden border border-border">
-                        <div
-                          className="h-full bg-accent-secondary transition-all duration-300"
-                          style={{ width: `${Math.round((m.solved / maxSolvedInMonth) * 100)}%` }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
-          </Card>
+          </div>
         </div>
       </div>
     </section>

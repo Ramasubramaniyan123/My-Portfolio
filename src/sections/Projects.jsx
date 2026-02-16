@@ -13,33 +13,32 @@ const Projects = () => {
     ? projectsData 
     : projectsData.filter(project => project.status.toLowerCase() === filter);
 
-  const ProjectCard = ({ project, index }) => {
+  const ProjectCard = ({ project }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-      <Card key={project.id} delay={index * 0.1} className="h-full group">
-        <div className="space-y-4">
+      <div className="bg-white rounded-xl border border-border p-6 transition-all duration-250 hover:shadow-lg hover:border-primary hover:scale-105 hover:-translate-y-1 group flex flex-col h-full">
+        <div className="space-y-4 flex-grow">
           {/* Project Header */}
           <div className="flex items-start justify-between">
             <div className="flex-1">
-              <h3 className="text-xl font-bold text-text-primary mb-2">
+              <h3 className="text-xl font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">
                 {project.title}
               </h3>
-              <Badge 
-                variant={project.status === 'Completed' ? 'success' : 'default'}
-                size="sm"
-              >
+              <div className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${
+                project.status === 'Completed' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'
+              }`}>
                 {project.status}
-              </Badge>
+              </div>
             </div>
             <div className="flex space-x-2">
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-text-secondary hover:text-text-primary transition-all duration-300 hover:rotate-[15deg]"
+                className="text-text-secondary hover:text-primary transition-all duration-250 hover:rotate-[12deg] hover:scale-110"
               >
-                <Github size={18} />
+                <Github size={20} />
               </a>
             </div>
           </div>
@@ -52,9 +51,9 @@ const Projects = () => {
           {/* Tech Stack */}
           <div className="flex flex-wrap gap-2">
             {project.techStack.map((tech) => (
-              <Badge key={tech} variant="secondary" size="sm">
+              <span key={tech} className="px-2.5 py-1 rounded-md bg-background border border-border text-text-secondary text-xs font-medium">
                 {tech}
-              </Badge>
+              </span>
             ))}
           </div>
 
@@ -62,48 +61,48 @@ const Projects = () => {
           <div className="space-y-2">
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="flex items-center space-x-2 text-accent-secondary hover:text-accent-primary text-sm font-medium transition-colors"
+              className="flex items-center space-x-2 text-primary hover:text-primary-hover text-sm font-semibold transition-colors"
             >
-              <Code size={16} className="transition-transform duration-300 group-hover:rotate-[15deg]" />
+              <Code size={16} className="transition-transform duration-250 group-hover:rotate-[12deg]" />
               <span>{isExpanded ? 'Hide' : 'Show'} Features</span>
             </button>
             
             {isExpanded && (
-              <ul className="space-y-1 text-sm text-text-secondary">
+              <ul className="space-y-1.5 text-sm text-text-secondary animate-fade-in">
                 {project.features.map((feature, idx) => (
                   <li
                     key={idx}
-                    className="flex items-center space-x-2"
+                    className="flex items-start space-x-2"
                   >
-                    <CheckCircle size={12} className="text-accent-primary flex-shrink-0" />
+                    <CheckCircle size={14} className="text-primary mt-0.5 flex-shrink-0" />
                     <span>{feature}</span>
                   </li>
                 ))}
               </ul>
             )}
           </div>
-
-          {/* Action Button */}
-          <div className="pt-4">
-            <Button
-              href={project.githubUrl}
-              variant="secondary"
-              size="sm"
-              className="w-full group"
-            >
-              <Github size={16} className="mr-2" />
-              View on GitHub
-              <ExternalLink size={14} className="ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </div>
         </div>
-      </Card>
+
+        {/* Action Button */}
+        <div className="pt-6 mt-auto">
+          <Button
+            href={project.githubUrl}
+            variant="secondary"
+            size="sm"
+            className="w-full btn-secondary py-2.5 text-black"
+          >
+            <Github size={18} className="mr-2" />
+            View on GitHub
+            <ExternalLink size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+          </Button>
+        </div>
+      </div>
     );
   };
 
   return (
-    <section id="projects" className="section-padding bg-secondary/30">
-      <div className="max-w-7xl mx-auto container-padding">
+    <section id="projects" className="section-padding bg-background">
+      <div className="max-w-8xl mx-auto container-padding">
         <SectionTitle
           title="Projects"
           subtitle="Showcasing my journey through practical application of skills and technologies"
@@ -111,15 +110,15 @@ const Projects = () => {
         />
 
         {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-4 mb-16">
           {['all', 'active', 'completed', 'development'].map((status) => (
             <button
               key={status}
               onClick={() => setFilter(status)}
-              className={`px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
+              className={`px-8 py-2.5 rounded-full font-bold text-sm transition-all duration-250 ${
                 filter === status
-                  ? 'bg-accent-primary text-primary shadow-lg shadow-accent-primary/10'
-                  : 'bg-secondary text-text-secondary hover:bg-card border border-border'
+                  ? 'bg-primary text-white shadow-md'
+                  : 'bg-white text-text-secondary hover:bg-primary/5 border border-border hover:border-primary/30'
               }`}
             >
               {status.charAt(0).toUpperCase() + status.slice(1)}

@@ -18,7 +18,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-secondary/50 backdrop-blur-sm border-t border-border">
+    <footer className="bg-background backdrop-blur-sm border-t border-border">
       <div className="max-w-7xl mx-auto container-padding py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand Section */}

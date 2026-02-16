@@ -7,18 +7,29 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#1c1c1c',
-        secondary: '#242424',
-        card: '#2e2e2e',
-        border: '#3a3a3a',
-        accent: {
-          primary: '#7aa2f7',
-          secondary: '#5ec8d8',
+        background: '#f5f7fa',
+        section: '#ffffff',
+        card: '#ffffff',
+        border: '#e5e7eb',
+        primary: {
+          DEFAULT: '#22c55e', // Light green
+          hover: '#16a34a',
+        },
+        secondary: {
+          DEFAULT: '#3b82f6', // Light blue
+          hover: '#2563eb',
         },
         text: {
-          primary: '#f2f2f2',
-          secondary: '#c0c0c0',
+          primary: '#111827',
+          secondary: '#4b5563',
         }
+      },
+      transitionDuration: {
+        250: '250ms',
+      },
+      maxWidth: {
+        '8xl': '1400px',
+        '9xl': '1600px',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

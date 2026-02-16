@@ -89,7 +89,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="section-padding bg-primary">
+    <section id="contact" className="section-padding bg-background">
       <div className="max-w-7xl mx-auto container-padding">
         <SectionTitle
           title="Get In Touch"
@@ -114,7 +114,7 @@ const Contact = () => {
               {contactInfo.map((info, index) => (
                 <Card key={index} hover={true} delay={index * 0.1}>
                   <div className="flex items-center space-x-4">
-                    <div className={`p-3 rounded-lg bg-secondary border border-border ${info.color}`}>
+                    <div className={`p-3 rounded-lg bg-background border border-border ${info.color}`}>
                       <info.icon size={20} />
                     </div>
                     <div className="flex-1">
@@ -146,7 +146,7 @@ const Contact = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="p-3 rounded-lg bg-secondary border border-border text-text-secondary transition-all duration-300 hover:scale-110 hover:rotate-[15deg] hover:border-accent-primary"
+                    className="p-3 rounded-lg bg-background border border-border text-text-secondary transition-all duration-300 hover:scale-110 hover:rotate-[15deg] hover:border-accent-primary"
                   >
                     <social.icon size={20} className={social.color} />
                   </a>
@@ -157,7 +157,7 @@ const Contact = () => {
 
           {/* Contact Form */}
           <div>
-            <Card className="h-full">
+            <Card className="h-full bg-background">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <h3 className="text-2xl font-bold text-text-primary mb-6">Send a Message</h3>
@@ -175,7 +175,7 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-secondary border border-border rounded-lg text-text-primary placeholder:text-text-secondary/70 focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary/30 transition-all duration-200"
+                      className="w-full px-4 py-3 bg-background border border-border rounded-lg text-text-primary placeholder:text-text-secondary/70 focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary/30 transition-all duration-200"
                       placeholder="Your Name"
                     />
                   </div>
@@ -191,7 +191,7 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-secondary border border-border rounded-lg text-text-primary placeholder:text-text-secondary/70 focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary/30 transition-all duration-200"
+                      className="w-full px-4 py-3 bg-background border border-border rounded-lg text-text-primary placeholder:text-text-secondary/70 focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary/30 transition-all duration-200"
                       placeholder="your.email@example.com"
                     />
                   </div>
@@ -208,7 +208,7 @@ const Contact = () => {
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-secondary border border-border rounded-lg text-text-primary placeholder:text-text-secondary/70 focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary/30 transition-all duration-200"
+                    className="w-full px-4 py-3 bg-background border border-border rounded-lg text-text-primary placeholder:text-text-secondary/70 focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary/30 transition-all duration-200"
                     placeholder="What's this about?"
                   />
                 </div>
@@ -224,7 +224,7 @@ const Contact = () => {
                     onChange={handleInputChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 bg-secondary border border-border rounded-lg text-text-primary placeholder:text-text-secondary/70 focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary/30 transition-all duration-200 resize-none"
+                    className="w-full px-4 py-3 bg-background border border-border rounded-lg text-text-primary placeholder:text-text-secondary/70 focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary/30 transition-all duration-200 resize-none"
                     placeholder="Your message here..."
                   />
                 </div>

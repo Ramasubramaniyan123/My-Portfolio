@@ -38,7 +38,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="section-padding bg-secondary/30">
+    <section id="about" className="section-padding bg-background">
       <div className="max-w-7xl mx-auto container-padding">
         <SectionTitle
           title="About Me"
@@ -86,7 +86,7 @@ const About = () => {
             {aboutPoints.map((point, index) => (
               <Card key={index} hover={true} delay={index * 0.1}>
                 <div className="flex items-start space-x-4">
-                  <div className={`p-3 rounded-lg bg-secondary border border-border ${point.color}`}>
+                  <div className={`p-3 rounded-lg bg-background border border-border ${point.color}`}>
                     <point.icon size={24} />
                   </div>
                   <div className="flex-1">

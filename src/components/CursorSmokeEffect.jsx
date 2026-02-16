@@ -1,5 +1,34 @@
 import { useEffect, useRef, useState } from 'react';
 
+class Particle {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.size = Math.random() * 2 + 0.5;
+    this.speedX = (Math.random() - 0.5) * 0.5;
+    this.speedY = (Math.random() - 0.5) * 0.5;
+    this.life = 1;
+    this.decay = Math.random() * 0.02 + 0.01;
+  }
+
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.life -= this.decay;
+    this.size *= 0.98;
+  }
+
+  draw(ctx) {
+    ctx.save();
+    ctx.globalAlpha = this.life * 0.3;
+    ctx.fillStyle = '#8ab4f8';
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
 const CursorSmokeEffect = () => {
   const canvasRef = useRef(null);
   const particlesRef = useRef([]);
@@ -28,36 +57,6 @@ const CursorSmokeEffect = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    class Particle {
-      constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.size = Math.random() * 2 + 0.5;
-        this.speedX = (Math.random() - 0.5) * 0.5;
-        this.speedY = (Math.random() - 0.5) * 0.5;
-        this.life = 1;
-        this.decay = Math.random() * 0.02 + 0.01;
-      }
-
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        this.life -= this.decay;
-        this.size *= 0.98;
-      }
-
-      draw() {
-        ctx.save();
-        ctx.globalAlpha = this.life * 0.3;
-        ctx.fillStyle = '#8ab4f8';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      }
-    }
-
-    let animationId;
     let lastTime = 0;
     const frameInterval = 1000 / 30; // 30fps for performance
 
