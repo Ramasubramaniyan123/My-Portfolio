@@ -12,9 +12,9 @@ const Button = ({
   const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-300';
   
   const variants = {
-    primary: 'bg-accent-primary text-primary hover:bg-accent-primary/90 hover:shadow-lg hover:shadow-accent-primary/20 hover:-translate-y-0.5',
-    secondary: 'border border-accent-primary text-accent-primary hover:bg-accent-primary hover:text-primary hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent-primary/10',
-    outline: 'border border-border text-text-secondary hover:border-accent-primary hover:text-text-primary'
+    primary: 'bg-primary text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5',
+    secondary: 'border border-primary text-primary hover:bg-primary hover:text-white hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/10',
+    outline: 'border border-border text-text-secondary hover:border-primary hover:text-text-primary'
   };
   
   const sizes = {

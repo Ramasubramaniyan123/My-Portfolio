@@ -18,6 +18,23 @@ export const experienceData = [
   },
   {
     id: 2,
+    title: 'MERN Stack Intern',
+    company: 'NOVI Tech Private Limited',
+    location: 'Chennai, Tamil Nadu',
+    period: 'June 2024 – August 2024',
+    type: 'Internship',
+    description: 'Hands-on internship experience working with the MERN stack to develop real-world web applications. Collaborated with development team to implement features and fix bugs.',
+    achievements: [
+      'Developed full-stack applications using MongoDB, Express, React, and Node.js',
+      'Implemented RESTful APIs and database schemas',
+      'Worked with Git version control and team collaboration',
+      'Fixed critical bugs and optimized application performance',
+      'Participated in code reviews and agile development processes'
+    ],
+    skills: ['MongoDB', 'Express.js', 'React', 'Node.js', 'MERN Stack', 'REST APIs', 'Git']
+  },
+  {
+    id: 3,
     title: 'Student Representative',
     company: 'Sri Venkateswaraa College of Technology',
     location: 'Chennai, Tamil Nadu',

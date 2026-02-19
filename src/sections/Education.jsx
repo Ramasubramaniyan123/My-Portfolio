@@ -26,8 +26,8 @@ const Education = () => {
       id: 2,
       degree: 'Higher Secondary',
       institution: 'Hindu Nadar Uravinmurai Committee Higher Secondary School',
-      location: 'Chennai, Tamil Nadu',
-      period: 'Sept 2021 – April 2022',
+      location: 'Tenkasi, Tamil Nadu',
+      period: 'Nov 2021 – May 2022',
       status: 'Completed',
       type: 'HSC',
       achievements: [
@@ -35,13 +35,13 @@ const Education = () => {
         'Strong foundation in programming concepts',
         'Participation in coding competitions'
       ],
-      highlights: ['Computer Science', 'Mathematics', 'Physics', 'Chemistry']
+      highlights: ['Mathematics', 'Physics', 'Chemistry']
     },
     {
       id: 3,
       degree: 'SSLC (10th Grade)',
       institution: 'Hindu Nadar Uravinmurai Committee Higher Secondary School',
-      location: 'Chennai, Tamil Nadu',
+      location: 'Tenkasi, Tamil Nadu',
       period: 'June 2019 – July 2020',
       status: 'Completed',
       type: 'Secondary Education',
@@ -50,7 +50,7 @@ const Education = () => {
         'Foundation in logical thinking',
         'Early interest in technology'
       ],
-      highlights: ['Mathematics', 'Science', 'Computer Basics']
+      highlights: ['Mathematics', 'Science', 'English']
     }
   ];
 
@@ -61,18 +61,18 @@ const Education = () => {
       <div className="relative">
         {/* Timeline Connection */}
         {index < educationData.length - 1 && (
-          <div className="hidden md:block absolute left-8 top-24 bottom-0 w-0.5 bg-gradient-to-b from-accent-primary/40 to-transparent" />
+          <div className="hidden md:block absolute left-8 top-24 bottom-0 w-0.5 bg-gradient-to-b from-primary/40 to-transparent" />
         )}
 
-        <Card className={`relative ${isLatest ? 'border-accent-primary/30 bg-background' : ''}`}>
+        <Card className={`relative ${isLatest ? 'border-primary/30' : ''}`}>
           {/* Timeline Dot */}
           <div className="absolute -left-12 top-8 hidden md:block">
             <div
-              className="w-6 h-6 bg-accent-primary rounded-full border-4 border-primary"
+              className="w-6 h-6 bg-primary rounded-full border-4 border-primary"
             />
             {isLatest && (
               <div
-                className="absolute inset-0 w-6 h-6 bg-accent-primary rounded-full"
+                className="absolute inset-0 w-6 h-6 bg-primary rounded-full"
               />
             )}
           </div>
@@ -82,8 +82,8 @@ const Education = () => {
             <div className="flex items-start justify-between">
               <div className="flex-1">
                 <div className="flex items-center space-x-3 mb-2">
-                  <GraduationCap className={`w-5 h-5 ${isLatest ? 'text-accent-primary' : 'text-text-secondary'}`} />
-                  <h3 className="text-xl font-bold text-text-primary">
+                  <GraduationCap className={`w-5 h-5 ${isLatest ? 'text-primary' : 'text-text-secondary'}`} />
+                  <h3 className="text-xl font-bold text-text-primary dark:text-slate-100">
                     {education.degree}
                   </h3>
                   {isLatest && (
@@ -92,7 +92,7 @@ const Education = () => {
                     </Badge>
                   )}
                 </div>
-                <div className="text-accent-primary font-medium mb-1">
+                <div className="text-primary font-medium mb-1">
                   {education.institution}
                 </div>
               </div>
@@ -102,7 +102,7 @@ const Education = () => {
             </div>
 
             {/* Meta Info */}
-            <div className="space-y-2 text-sm text-text-secondary">
+            <div className="space-y-2 text-sm text-text-secondary dark:text-slate-300">
               <div className="flex items-center space-x-2">
                 <Calendar size={14} />
                 <span>{education.period}</span>
@@ -115,13 +115,13 @@ const Education = () => {
 
             {/* Achievements */}
             <div className="space-y-2">
-              <h4 className="text-sm font-semibold text-text-primary flex items-center space-x-2">
+              <h4 className="text-sm font-semibold text-text-primary dark:text-slate-100 flex items-center space-x-2">
                 <Award size={14} className="text-accent-secondary" />
                 <span>Key Achievements</span>
               </h4>
               <ul className="space-y-1">
                 {education.achievements.map((achievement, idx) => (
-                  <li key={idx} className="flex items-start space-x-2 text-sm text-text-muted">
+                  <li key={idx} className="flex items-start space-x-2 text-sm text-text-secondary dark:text-slate-300">
                     <div className="w-1.5 h-1.5 bg-accent-secondary rounded-full mt-1.5 flex-shrink-0" />
                     <span>{achievement}</span>
                   </li>
@@ -131,7 +131,7 @@ const Education = () => {
 
             {/* Subject Highlights */}
             <div className="space-y-2">
-              <h4 className="text-sm font-semibold text-text-primary flex items-center space-x-2">
+              <h4 className="text-sm font-semibold text-text-primary dark:text-slate-100 flex items-center space-x-2">
                 <BookOpen size={14} className="text-accent-secondary" />
                 <span>Focus Areas</span>
               </h4>
@@ -150,11 +150,11 @@ const Education = () => {
   };
 
   return (
-    <section id="education" className="section-padding bg-background">
-      <div className="max-w-7xl mx-auto container-padding">
+    <section id="education" className="section-padding bg-background dark:bg-slate-900">
+      <div className="max-w-[1400px] mx-auto container-padding">
         <SectionTitle
           title="Education"
-          subtitle="Academic journey building the foundation for a career in software engineering"
+          subtitle="Academic journey and technical foundation"
           className="mb-16"
         />
 

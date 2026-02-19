@@ -11,19 +11,19 @@
   
   body {
     font-family: 'Inter', system-ui, sans-serif;
-    background-color: #f5f7fa;
-    color: #111827;
+    @apply bg-background dark:bg-slate-900 text-text-primary dark:text-slate-100;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
 @layer components {
   .gradient-text {
-    @apply text-text-primary;
+    @apply text-text-primary dark:text-slate-100;
   }
   
   .nav-blur {
-    @apply backdrop-blur-md bg-white/90 border-b border-border shadow-sm;
+    @apply backdrop-blur-md bg-white/90 dark:bg-slate-800/90 border-b border-border dark:border-slate-700 shadow-sm;
   }
   
   .card-hover {
@@ -35,7 +35,7 @@
   }
   
   .btn-secondary {
-    @apply border border-primary text-primary px-6 py-3 rounded-lg font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary hover:text-white;
+    @apply border border-primary text-primary dark:text-slate-100 px-6 py-3 rounded-lg font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary hover:text-white;
   }
   
   .icon-hover {

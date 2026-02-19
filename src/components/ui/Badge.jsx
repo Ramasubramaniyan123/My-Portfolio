@@ -9,10 +9,10 @@ const Badge = ({
   const baseClasses = 'inline-flex items-center justify-center font-medium rounded-full';
   
   const variants = {
-    default: 'bg-secondary text-text-secondary border border-border',
-    secondary: 'bg-accent-secondary/10 text-accent-secondary border border-accent-secondary/30',
-    success: 'bg-accent-primary/10 text-accent-primary border border-accent-primary/30',
-    outline: 'border border-border text-text-secondary'
+    default: 'bg-secondary text-white border border-secondary',
+    secondary: 'bg-primary/10 text-primary border border-primary/30 dark:bg-primary/20 dark:text-primary dark:border-primary/40',
+    success: 'bg-primary/10 text-primary border border-primary/30 dark:bg-primary/20 dark:text-primary dark:border-primary/40',
+    outline: 'border border-border text-text-secondary dark:text-slate-300 dark:border-slate-600'
   };
   
   const sizes = {

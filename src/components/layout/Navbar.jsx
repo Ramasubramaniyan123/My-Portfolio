@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Github, Linkedin, Mail, Menu, X, Code } from 'lucide-react';
 import { useScrollSpy } from '../../hooks/useScrollSpy';
+import ThemeToggle from '../ui/ThemeToggle';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const sectionIds = ['home', 'about', 'skills', 'leetcode', 'projects', 'experience', 'education', 'contact'];
+  const sectionIds = ['home', 'about', 'skills', 'leetcode', 'projects', 'experience', 'education', 'certifications', 'contact'];
   const activeSection = useScrollSpy(sectionIds);
 
   useEffect(() => {
@@ -26,6 +27,7 @@ const Navbar = () => {
     { name: 'Projects', href: '#projects' },
     { name: 'Experience', href: '#experience' },
     { name: 'Education', href: '#education' },
+    { name: 'Certifications', href: '#certifications' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -56,7 +58,7 @@ const Navbar = () => {
           <div className="flex-shrink-0 transition-transform duration-300 hover:scale-[1.03]">
             <button
               type="button"
-              className="text-2xl font-bold text-text-primary cursor-pointer"
+              className="text-2xl font-bold text-text-primary dark:text-slate-100 cursor-pointer"
               onClick={() => handleNavClick('#home')}
               aria-label="Go to home"
             >
@@ -76,7 +78,7 @@ const Navbar = () => {
                   className={`relative py-2 text-sm font-semibold transition-colors duration-250 ${
                     activeSection === item.href.slice(1)
                       ? 'text-primary'
-                      : 'text-text-secondary hover:text-secondary'
+                      : 'text-text-secondary dark:text-slate-300 hover:text-secondary'
                   }`}
                 >
                   {item.name}
@@ -89,7 +91,10 @@ const Navbar = () => {
           </div>
 
           {/* Right Section */}
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-4">
+            {/* Theme Toggle */}
+            <ThemeToggle />
+            
             {/* Social Links - Desktop */}
             <div className="hidden md:flex items-center space-x-5">
               {socialLinks.map((social) => (
@@ -99,7 +104,7 @@ const Navbar = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="text-text-secondary hover:text-secondary transition-all duration-250 hover:rotate-[12deg] hover:scale-110"
+                  className="text-text-secondary dark:text-slate-300 hover:text-secondary transition-all duration-250 hover:rotate-[12deg] hover:scale-110"
                 >
                   <social.icon size={20} />
                 </a>
@@ -109,7 +114,7 @@ const Navbar = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden text-text-secondary hover:text-primary transition-colors"
+              className="md:hidden text-text-secondary dark:text-slate-300 hover:text-primary transition-colors"
             >
               {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
@@ -119,7 +124,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-border shadow-xl">
+        <div className="md:hidden bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border-t border-border dark:border-slate-700 shadow-xl">
           <div className="px-6 py-8 space-y-6">
             {navItems.map((item) => (
               <button
@@ -128,14 +133,14 @@ const Navbar = () => {
                 className={`block w-full text-left text-base font-semibold transition-colors duration-250 ${
                   activeSection === item.href.slice(1)
                     ? 'text-primary'
-                    : 'text-text-secondary hover:text-secondary'
+                    : 'text-text-secondary dark:text-slate-300 hover:text-secondary'
                 }`}
               >
                 {item.name}
               </button>
             ))}
             
-            <div className="flex items-center space-x-6 pt-6 border-t border-border">
+            <div className="flex items-center space-x-6 pt-6 border-t border-border dark:border-slate-700">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
@@ -143,7 +148,7 @@ const Navbar = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="text-text-secondary hover:text-secondary transition-all duration-250 hover:rotate-[12deg]"
+                  className="text-text-secondary dark:text-slate-300 hover:text-secondary transition-all duration-250 hover:rotate-[12deg]"
                 >
                   <social.icon size={24} />
                 </a>

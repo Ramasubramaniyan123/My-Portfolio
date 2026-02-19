@@ -18,20 +18,20 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-background backdrop-blur-sm border-t border-border">
+    <footer className="bg-background dark:bg-slate-900 backdrop-blur-sm border-t border-border dark:border-slate-700">
       <div className="max-w-7xl mx-auto container-padding py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand Section */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="text-xl font-extrabold tracking-wide text-text-primary">
-                R<span className="text-accent-primary">K</span>
+              <div className="text-xl font-extrabold tracking-wide text-text-primary dark:text-white">
+                R<span className="text-primary">K</span>
               </div>
-              <div className="text-sm text-text-secondary">
+              <div className="text-sm text-text-secondary dark:text-slate-300">
                 Ramasubramaniyan K
               </div>
             </div>
-            <p className="text-text-muted text-sm">
+            <p className="text-text-secondary dark:text-slate-300 text-sm">
               Final-year Cybersecurity student passionate about Java, DSA, and building efficient backend systems.
             </p>
             <div className="flex items-center space-x-4">
@@ -42,7 +42,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="text-text-muted hover:text-accent transition-all duration-300 hover:rotate-[15deg]"
+                  className="text-text-secondary dark:text-slate-300 hover:text-primary transition-all duration-300 hover:rotate-[15deg]"
                 >
                   <social.icon size={20} />
                 </a>
@@ -52,13 +52,13 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-text-primary">Quick Links</h4>
+            <h4 className="text-lg font-semibold text-text-primary dark:text-white">Quick Links</h4>
             <ul className="space-y-2">
-              {['Home', 'About', 'Skills', 'LeetCode', 'Projects', 'Experience', 'Education', 'Contact'].map((item) => (
+              {['Home', 'About', 'Skills', 'LeetCode', 'Projects', 'Experience', 'Education', 'Certifications', 'Contact'].map((item) => (
                 <li key={item}>
                   <a
                     href={`#${item.toLowerCase()}`}
-                    className="text-text-muted hover:text-accent transition-colors duration-200 text-sm"
+                    className="text-text-secondary dark:text-slate-300 hover:text-primary transition-colors duration-200 text-sm"
                   >
                     {item}
                   </a>
@@ -69,11 +69,11 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-text-primary">Contact Info</h4>
+            <h4 className="text-lg font-semibold text-text-primary dark:text-white">Contact Info</h4>
             <div className="space-y-3">
               {contactInfo.map((info, index) => (
-                <div key={index} className="flex items-center space-x-3 text-text-muted text-sm">
-                  <info.icon size={16} className="text-accent" />
+                <div key={index} className="flex items-center space-x-3 text-text-secondary dark:text-slate-300 text-sm">
+                  <info.icon size={16} className="text-primary" />
                   <span>{info.text}</span>
                 </div>
               ))}
@@ -82,8 +82,8 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="mt-8 pt-8 border-t border-white/5 text-center">
-          <p className="text-text-muted text-sm">
+        <div className="mt-8 pt-8 border-t border-border dark:border-slate-700 text-center">
+          <p className="text-text-secondary dark:text-slate-300 text-sm">
             © {currentYear} Ramasubramaniyan K. All rights reserved. Built with React and Tailwind CSS.
           </p>
         </div>

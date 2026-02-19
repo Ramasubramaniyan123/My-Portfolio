@@ -20,21 +20,21 @@ const Contact = () => {
       label: 'Phone',
       value: '+91 7871560486',
       href: 'tel:+917871560486',
-      color: 'text-accent-primary'
+      color: 'text-primary'
     },
     {
       icon: Mail,
       label: 'Email',
       value: 'ramasubramaniyan.k12@gmail.com',
       href: 'mailto:ramasubramaniyan.k12@gmail.com',
-      color: 'text-accent-primary'
+      color: 'text-primary'
     },
     {
       icon: MapPin,
       label: 'Location',
       value: 'Chennai, Tamil Nadu, India',
       href: null,
-      color: 'text-text-muted'
+      color: 'text-text-secondary'
     }
   ];
 
@@ -43,19 +43,19 @@ const Contact = () => {
       icon: Github,
       href: 'https://github.com/Ramasubramaniyan123',
       label: 'GitHub',
-      color: 'hover:text-text-primary'
+      color: 'hover:text-text-primary dark:text-white'
     },
     {
       icon: Linkedin,
       href: 'https://www.linkedin.com/in/ramasubramaniyan-k-486086255',
       label: 'LinkedIn',
-      color: 'hover:text-accent-primary'
+      color: 'hover:text-primary'
     },
     {
       icon: Mail,
       href: 'mailto:ramasubramaniyan.k12@gmail.com',
       label: 'Email',
-      color: 'hover:text-accent-primary'
+      color: 'hover:text-primary'
     }
   ];
 
@@ -89,11 +89,11 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="section-padding bg-background">
-      <div className="max-w-7xl mx-auto container-padding">
+    <section id="contact" className="section-padding bg-background dark:bg-slate-900">
+      <div className="max-w-8xl mx-auto container-padding">
         <SectionTitle
-          title="Get In Touch"
-          subtitle="Feel free to reach out for collaborations, opportunities, or just a friendly hello"
+          title="Contact"
+          subtitle="Let's connect and discuss opportunities"
           className="mb-16"
         />
 
@@ -101,8 +101,8 @@ const Contact = () => {
           {/* Contact Information */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-text-primary mb-6">Let's Connect</h3>
-              <p className="text-text-secondary mb-8">
+              <h3 className="text-2xl font-bold text-text-primary dark:text-white dark:text-slate-100 mb-6">Let's Connect</h3>
+              <p className="text-text-secondary dark:text-slate-300 mb-8">
                 I'm always interested in hearing about new opportunities, 
                 exciting projects, or just having a conversation about technology 
                 and programming. Don't hesitate to reach out!
@@ -114,20 +114,20 @@ const Contact = () => {
               {contactInfo.map((info, index) => (
                 <Card key={index} hover={true} delay={index * 0.1}>
                   <div className="flex items-center space-x-4">
-                    <div className={`p-3 rounded-lg bg-background border border-border ${info.color}`}>
+                    <div className={`p-3 rounded-lg bg-background dark:bg-slate-800 border border-border dark:border-slate-600 ${info.color}`}>
                       <info.icon size={20} />
                     </div>
                     <div className="flex-1">
-                      <div className="text-sm text-text-muted mb-1">{info.label}</div>
+                      <div className="text-sm text-text-muted dark:text-slate-400 mb-1">{info.label}</div>
                       {info.href ? (
                         <a
                           href={info.href}
-                          className="text-text-primary font-medium hover:text-accent-primary transition-colors"
+                          className="text-text-primary dark:text-white dark:text-slate-100 font-medium hover:text-accent-primary transition-colors"
                         >
                           {info.value}
                         </a>
                       ) : (
-                        <div className="text-text-primary font-medium">{info.value}</div>
+                        <div className="text-text-primary dark:text-white dark:text-slate-100 font-medium">{info.value}</div>
                       )}
                     </div>
                   </div>
@@ -137,7 +137,7 @@ const Contact = () => {
 
             {/* Social Links */}
             <div>
-              <h4 className="text-lg font-semibold text-text-primary mb-4">Follow Me</h4>
+              <h4 className="text-lg font-semibold text-text-primary dark:text-white dark:text-slate-100 mb-4">Follow Me</h4>
               <div className="flex space-x-4">
                 {socialLinks.map((social) => (
                   <a
@@ -146,7 +146,7 @@ const Contact = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="p-3 rounded-lg bg-background border border-border text-text-secondary transition-all duration-300 hover:scale-110 hover:rotate-[15deg] hover:border-accent-primary"
+                    className="p-3 rounded-lg bg-background dark:bg-slate-800 border border-border dark:border-slate-600 text-text-secondary dark:text-slate-300 transition-all duration-300 hover:scale-110 hover:rotate-[15deg] hover:border-accent-primary"
                   >
                     <social.icon size={20} className={social.color} />
                   </a>
@@ -160,7 +160,7 @@ const Contact = () => {
             <Card className="h-full bg-background">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <h3 className="text-2xl font-bold text-text-primary mb-6">Send a Message</h3>
+                  <h3 className="text-2xl font-bold text-text-primary dark:text-white mb-6">Send a Message</h3>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -175,7 +175,7 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-background border border-border rounded-lg text-text-primary placeholder:text-text-secondary/70 focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary/30 transition-all duration-200"
+                      className="w-full px-4 py-3 bg-background dark:bg-slate-800 border border-border dark:border-slate-600 rounded-lg text-text-primary dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-400/70 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all duration-200"
                       placeholder="Your Name"
                     />
                   </div>
@@ -191,7 +191,7 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-background border border-border rounded-lg text-text-primary placeholder:text-text-secondary/70 focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary/30 transition-all duration-200"
+                      className="w-full px-4 py-3 bg-background dark:bg-slate-800 border border-border dark:border-slate-600 rounded-lg text-text-primary dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-400/70 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all duration-200"
                       placeholder="your.email@example.com"
                     />
                   </div>
@@ -208,7 +208,7 @@ const Contact = () => {
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-background border border-border rounded-lg text-text-primary placeholder:text-text-secondary/70 focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary/30 transition-all duration-200"
+                    className="w-full px-4 py-3 bg-background dark:bg-slate-800 border border-border dark:border-slate-600 rounded-lg text-text-primary dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-400/70 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all duration-200"
                     placeholder="What's this about?"
                   />
                 </div>
@@ -224,13 +224,14 @@ const Contact = () => {
                     onChange={handleInputChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 bg-background border border-border rounded-lg text-text-primary placeholder:text-text-secondary/70 focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary/30 transition-all duration-200 resize-none"
+                    className="w-full px-4 py-3 bg-background dark:bg-slate-800 border border-border dark:border-slate-600 rounded-lg text-text-primary dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-400/70 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all duration-200 resize-none"
                     placeholder="Your message here..."
                   />
                 </div>
 
                 <Button
                   type="submit"
+                  variant="primary"
                   disabled={isSubmitting}
                   className="w-full group"
                 >
@@ -270,7 +271,7 @@ const Contact = () => {
                 or just want to connect - I'm always open to meaningful conversations.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button href="mailto:ramasubramaniyan.k12@gmail.com">
+                <Button variant="secondary" href="mailto:ramasubramaniyan.k12@gmail.com">
                   <Mail size={18} className="mr-2" />
                   Email Me
                 </Button>

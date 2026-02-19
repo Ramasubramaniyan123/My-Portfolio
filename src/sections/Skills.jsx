@@ -11,7 +11,7 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="section-padding bg-background">
+    <section id="skills" className="section-padding bg-background dark:bg-slate-900">
       <div className="max-w-[1400px] mx-auto container-padding">
         <SectionTitle
           title="Skills"
@@ -19,44 +19,33 @@ const Skills = () => {
           className="mb-16"
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24">
-          {/* LEFT SIDE: TECHNICAL SKILLS */}
+        <div className="grid grid-cols-1 gap-16 md:gap-24">
+          {/* TECHNICAL SKILLS */}
           <div className="space-y-10">
-            <div className="inline-block border-l-4 border-primary pl-4">
-              <h3 className="text-2xl font-bold text-text-primary tracking-tight">Technical Skills</h3>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-6">
               {technicalCategories.map((category) => (
-                <div key={category.key} className="space-y-4">
-                  <h4 className="text-lg font-bold text-text-primary">{category.title}</h4>
-                  <ul className="space-y-2">
-                    {skillsData.technical[category.key].map((skill) => (
-                      <li key={skill} className="flex items-center text-text-secondary">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary mr-3" />
-                        <span className="text-base font-medium">{skill}</span>
-                      </li>
+                <div key={category.key} className="space-y-3">
+                  <h4 className="text-lg font-bold text-primary dark:text-primary">{category.title}</h4>
+                  <div className="flex flex-wrap gap-3">
+                    {skillsData.technical[category.key].map((skill, index) => (
+                      <span key={index} className="text-base font-medium text-text-primary dark:text-slate-100 px-3 py-1 bg-white dark:bg-slate-700 border border-border dark:border-slate-600 rounded-md">
+                        {skill.name}
+                      </span>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* RIGHT SIDE: SOFT SKILLS */}
+          {/* SOFT SKILLS */}
           <div className="space-y-10">
-            <div className="inline-block border-l-4 border-secondary pl-4">
-              <h3 className="text-2xl font-bold text-text-primary tracking-tight">Soft Skills</h3>
-            </div>
-
+            <h4 className="text-lg font-bold text-primary dark:text-primary">Soft Skills</h4>
             <div className="flex flex-wrap gap-3">
-              {skillsData.soft.map((skill) => (
-                <div
-                  key={skill}
-                  className="px-5 py-2.5 rounded-full bg-background border border-border text-text-primary font-semibold text-sm transition-all duration-250 hover:bg-primary/10 hover:border-primary hover:scale-[1.02] cursor-default"
-                >
-                  {skill}
-                </div>
+              {skillsData.soft.map((skill, index) => (
+                <span key={index} className="text-base font-medium text-text-primary dark:text-slate-100 px-3 py-1 bg-white dark:bg-slate-700 border border-border dark:border-slate-600 rounded-md">
+                  {skill.name}
+                </span>
               ))}
             </div>
           </div>

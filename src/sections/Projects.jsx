@@ -4,6 +4,7 @@ import SectionTitle from '../components/ui/SectionTitle';
 import Card from '../components/ui/Card';
 import Badge from '../components/ui/Badge';
 import Button from '../components/ui/Button';
+import SocialShare from '../components/ui/SocialShare';
 import { projectsData } from '../data/projects.data';
 
 const Projects = () => {
@@ -11,22 +12,28 @@ const Projects = () => {
 
   const filteredProjects = filter === 'all' 
     ? projectsData 
-    : projectsData.filter(project => project.status.toLowerCase() === filter);
+    : projectsData.filter(project => {
+        const status = project.status.toLowerCase();
+        if (filter === 'development') {
+          return status.includes('development');
+        }
+        return status === filter || status.includes(filter);
+      });
 
   const ProjectCard = ({ project }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-      <div className="bg-white rounded-xl border border-border p-6 transition-all duration-250 hover:shadow-lg hover:border-primary hover:scale-105 hover:-translate-y-1 group flex flex-col h-full">
+      <div className="bg-white dark:bg-slate-800 rounded-xl border border-border dark:border-slate-700 p-6 transition-all duration-250 hover:shadow-lg hover:border-primary hover:scale-105 hover:-translate-y-1 group flex flex-col h-full">
         <div className="space-y-4 flex-grow">
           {/* Project Header */}
           <div className="flex items-start justify-between">
             <div className="flex-1">
-              <h3 className="text-xl font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">
+              <h3 className="text-xl font-bold text-text-primary dark:text-slate-100 mb-2 group-hover:text-primary transition-colors">
                 {project.title}
               </h3>
               <div className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${
-                project.status === 'Completed' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'
+                project.status === 'Completed' ? 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300' : 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
               }`}>
                 {project.status}
               </div>
@@ -36,7 +43,7 @@ const Projects = () => {
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-text-secondary hover:text-primary transition-all duration-250 hover:rotate-[12deg] hover:scale-110"
+                className="text-text-secondary dark:text-slate-300 hover:text-primary transition-all duration-250 hover:rotate-[12deg] hover:scale-110"
               >
                 <Github size={20} />
               </a>
@@ -44,14 +51,14 @@ const Projects = () => {
           </div>
 
           {/* Description */}
-          <p className="text-text-secondary text-sm leading-relaxed">
+          <p className="text-text-secondary dark:text-slate-300 text-sm leading-relaxed">
             {project.description}
           </p>
 
           {/* Tech Stack */}
           <div className="flex flex-wrap gap-2">
             {project.techStack.map((tech) => (
-              <span key={tech} className="px-2.5 py-1 rounded-md bg-background border border-border text-text-secondary text-xs font-medium">
+              <span key={tech} className="px-2.5 py-1 rounded-md bg-background dark:bg-slate-700 border border-border dark:border-slate-600 text-text-secondary dark:text-slate-300 text-xs font-medium">
                 {tech}
               </span>
             ))}
@@ -101,7 +108,7 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="section-padding bg-background">
+    <section id="projects" className="section-padding bg-background dark:bg-slate-900">
       <div className="max-w-8xl mx-auto container-padding">
         <SectionTitle
           title="Projects"
@@ -109,9 +116,17 @@ const Projects = () => {
           className="mb-16"
         />
 
+        {/* Social Share */}
+        <div className="flex justify-center mb-12">
+          <SocialShare 
+            title="Ramasubramaniyan K - Projects"
+            description="Check out my projects showcasing Java, Spring Boot, and full-stack development skills."
+          />
+        </div>
+
         {/* Filter Buttons */}
         <div className="flex flex-wrap justify-center gap-4 mb-16">
-          {['all', 'active', 'completed', 'development'].map((status) => (
+          {['all', 'completed', 'development'].map((status) => (
             <button
               key={status}
               onClick={() => setFilter(status)}

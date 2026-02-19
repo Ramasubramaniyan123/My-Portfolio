@@ -6,8 +6,8 @@ const Card = ({
   hover = true, 
   ...props 
 }) => {
-  const baseClasses = 'bg-card border border-border rounded-xl p-6';
-  const hoverClasses = hover ? 'hover:bg-card/95 hover:border-accent-primary hover:shadow-xl hover:shadow-black/30 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01]' : '';
+  const baseClasses = 'bg-white dark:bg-slate-800 border border-border dark:border-slate-700 rounded-xl p-6';
+  const hoverClasses = hover ? 'hover:shadow-lg hover:border-primary hover:scale-105 hover:-translate-y-1 transition-all duration-250' : '';
   
   const classes = `${baseClasses} ${hoverClasses} ${className}`;
 

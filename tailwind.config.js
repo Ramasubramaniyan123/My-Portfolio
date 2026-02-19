@@ -4,6 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -22,6 +23,7 @@ export default {
         text: {
           primary: '#111827',
           secondary: '#4b5563',
+          muted: '#6b7280',
         }
       },
       transitionDuration: {
