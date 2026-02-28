@@ -1,11 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 const PageTransition = ({ children }) => {
+  const prefersReducedMotion = usePrefersReducedMotion();
+
   const pageVariants = {
     initial: {
       opacity: 0,
-      y: 20,
+      y: prefersReducedMotion ? 0 : 20,
     },
     in: {
       opacity: 1,
@@ -13,15 +16,19 @@ const PageTransition = ({ children }) => {
     },
     out: {
       opacity: 0,
-      y: -20,
+      y: prefersReducedMotion ? 0 : -20,
     },
   };
 
   const pageTransition = {
-    type: 'tween',
+    type: prefersReducedMotion ? 'tween' : 'tween',
     ease: 'anticipate',
-    duration: 0.5,
+    duration: prefersReducedMotion ? 0.1 : 0.5,
   };
+
+  if (prefersReducedMotion) {
+    return <div>{children}</div>;
+  }
 
   return (
     <motion.div

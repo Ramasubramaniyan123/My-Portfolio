@@ -7,10 +7,10 @@ import TypingEffect from '../components/TypingEffect';
 
 const Hero = () => {
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/Ramasubramaniyan123', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://www.linkedin.com/in/ramasubramaniyan-k-486086255', label: 'LinkedIn' },
-    { icon: Mail, href: 'mailto:ramasubramaniyan.k12@gmail.com', label: 'Email' },
-    { icon: Code, href: 'https://leetcode.com/u/Ramasubramaniyan123/', label: 'LeetCode' },
+    { icon: Github, href: import.meta.env.VITE_GITHUB_URL || 'https://github.com/Ramasubramaniyan123', label: 'GitHub' },
+    { icon: Linkedin, href: import.meta.env.VITE_LINKEDIN_URL || 'https://www.linkedin.com/in/ramasubramaniyan-k-486086255', label: 'LinkedIn' },
+    { icon: Mail, href: `mailto:${import.meta.env.VITE_EMAIL || 'ramasubramaniyan.k12@gmail.com'}`, label: 'Email' },
+    { icon: Code, href: `https://leetcode.com/u/${import.meta.env.VITE_LEETCODE_USERNAME || 'Ramasubramaniyan123'}/`, label: 'LeetCode' },
   ];
 
   return (

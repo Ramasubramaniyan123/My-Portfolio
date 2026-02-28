@@ -1,7 +1,50 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Github, Linkedin, Mail, X } from 'lucide-react';
 
 const MobileMenu = ({ isOpen, onClose, navItems, activeSection, socialLinks }) => {
+  const menuRef = useRef(null);
+  const firstFocusableRef = useRef(null);
+  const lastFocusableRef = useRef(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      // Focus the first focusable element when menu opens
+      if (firstFocusableRef.current) {
+        firstFocusableRef.current.focus();
+      }
+
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = 'hidden';
+
+      const handleKeyDown = (e) => {
+        if (e.key === 'Escape') {
+          onClose();
+        }
+
+        // Focus trapping
+        if (e.key === 'Tab') {
+          if (e.shiftKey) {
+            if (document.activeElement === firstFocusableRef.current) {
+              e.preventDefault();
+              lastFocusableRef.current?.focus();
+            }
+          } else {
+            if (document.activeElement === lastFocusableRef.current) {
+              e.preventDefault();
+              firstFocusableRef.current?.focus();
+            }
+          }
+        }
+      };
+
+      document.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+        document.body.style.overflow = 'unset';
+      };
+    }
+  }, [isOpen, onClose]);
+
   const handleNavClick = (href) => {
     const element = document.querySelector(href);
     if (element) {
@@ -24,8 +67,10 @@ const MobileMenu = ({ isOpen, onClose, navItems, activeSection, socialLinks }) =
               <div className="flex items-center justify-between p-4 border-b border-border">
                 <span className="text-lg font-semibold text-text-primary">Menu</span>
                 <button
+                  ref={firstFocusableRef}
                   onClick={onClose}
                   className="text-text-secondary hover:text-text-primary transition-colors"
+                  aria-label="Close menu"
                 >
                   <X size={24} />
                 </button>
@@ -60,6 +105,7 @@ const MobileMenu = ({ isOpen, onClose, navItems, activeSection, socialLinks }) =
                       rel="noopener noreferrer"
                       aria-label={social.label}
                       className="text-text-secondary hover:text-text-primary transition-all duration-300 hover:rotate-[15deg]"
+                      ref={social === socialLinks[socialLinks.length - 1] ? lastFocusableRef : null}
                     >
                       <social.icon size={20} />
                     </a>

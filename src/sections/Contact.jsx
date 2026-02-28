@@ -3,16 +3,15 @@ import { Mail, Phone, MapPin, Send, Github, Linkedin, MessageSquare } from 'luci
 import SectionTitle from '../components/ui/SectionTitle';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
+import { useForm } from '../hooks/useForm';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
+  const { values: formData, isSubmitting, submitStatus, handleChange, handleSubmit } = useForm({
     name: '',
     email: '',
     subject: '',
     message: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState('');
 
   const contactInfo = [
     {
@@ -58,35 +57,6 @@ const Contact = () => {
       color: 'hover:text-primary'
     }
   ];
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus('');
-
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-      
-      // Reset status after 3 seconds
-      setTimeout(() => setSubmitStatus(''), 3000);
-    }, 1500);
-  };
 
   return (
     <section id="contact" className="section-padding bg-background dark:bg-slate-900">
@@ -173,7 +143,7 @@ const Contact = () => {
                       id="name"
                       name="name"
                       value={formData.name}
-                      onChange={handleInputChange}
+                      onChange={handleChange}
                       required
                       className="w-full px-4 py-3 bg-background dark:bg-slate-800 border border-border dark:border-slate-600 rounded-lg text-text-primary dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-400/70 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all duration-200"
                       placeholder="Your Name"
@@ -189,7 +159,7 @@ const Contact = () => {
                       id="email"
                       name="email"
                       value={formData.email}
-                      onChange={handleInputChange}
+                      onChange={handleChange}
                       required
                       className="w-full px-4 py-3 bg-background dark:bg-slate-800 border border-border dark:border-slate-600 rounded-lg text-text-primary dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-400/70 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all duration-200"
                       placeholder="your.email@example.com"
@@ -206,7 +176,7 @@ const Contact = () => {
                     id="subject"
                     name="subject"
                     value={formData.subject}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 bg-background dark:bg-slate-800 border border-border dark:border-slate-600 rounded-lg text-text-primary dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-400/70 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all duration-200"
                     placeholder="What's this about?"
@@ -221,7 +191,7 @@ const Contact = () => {
                     id="message"
                     name="message"
                     value={formData.message}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                     required
                     rows={6}
                     className="w-full px-4 py-3 bg-background dark:bg-slate-800 border border-border dark:border-slate-600 rounded-lg text-text-primary dark:text-white placeholder:text-text-secondary/70 dark:placeholder:text-slate-400/70 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all duration-200 resize-none"

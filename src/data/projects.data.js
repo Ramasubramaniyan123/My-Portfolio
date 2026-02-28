@@ -15,30 +15,29 @@ export const projectsData = [
   },
   {
     id: 2,
-    title: 'Online Cab Booking System',
-    description: 'Designed backend architecture for a cab booking system handling user registration, ride booking, driver allocation, and ride history management.',
-    techStack: ['Java', 'Spring Boot', 'REST APIs', 'MySQL'],
+    title: 'College Management System',
+    description: 'Developed backend system using Spring Data JPA to manage college students, professors, courses, and academic records with secure REST APIs.',
+    techStack: ['Java', 'Spring Data JPA', 'MySQL', 'REST API'],
     githubUrl: 'https://github.com/Ramasubramaniyan123',
     features: [
-      'User registration and profile management',
-      'Ride booking workflow and validations',
-      'Driver allocation and ride lifecycle tracking',
-      'Ride history management'
+      'Secure REST API layer for core entities',
+      'Student, professor, course, and academic record management',
+      'Database persistence with Spring Data JPA',
+      'Structured service/repository architecture'
     ],
-    status: 'In Development'
+    status: 'Completed'
   },
   {
     id: 3,
-    title: 'Portfolio Website',
-    description: 'A modern, responsive personal portfolio website built with React and Tailwind CSS. Features smooth animations and optimized performance for showcasing projects and skills.',
-    techStack: ['React', 'Tailwind CSS', 'Framer Motion', 'React Router'],
-    githubUrl: 'https://github.com/Ramasubramaniyan123/portfolio',
+    title: 'Indian Sign Language Detection System',
+    description: 'Developed a machine learning system to detect and interpret Indian Sign Language gestures for improved accessibility and communication.',
+    techStack: ['Python', 'TensorFlow', 'OpenCV', 'NumPy'],
+    githubUrl: 'https://github.com/Ramasubramaniyan123',
     features: [
-      'Responsive design for all devices',
-      'Single professional theme system',
-      'Smooth scroll animations',
-      'SEO optimized',
-      'Modern UI/UX design'
+      'Real-time gesture recognition',
+      'Indian Sign Language vocabulary support',
+      'Computer vision integration',
+      'Model training on custom datasets'
     ],
     status: 'Completed'
   }

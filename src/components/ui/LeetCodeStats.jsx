@@ -1,108 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Trophy, Target, TrendingUp, Code, ExternalLink, Loader2 } from 'lucide-react';
+import useLeetCodeStats from '../../hooks/useLeetCodeStats';
 
 const LeetCodeStats = () => {
-  const [stats, setStats] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchLeetCodeStats = async () => {
-      try {
-        // Using LeetCode GraphQL API
-        const query = `
-          query getUserProfile($username: String!) {
-            allQuestionsCount {
-              difficulty
-              count
-            }
-            matchedUser(username: $username) {
-              submitStats {
-                acSubmissionNum {
-                  difficulty
-                  count
-                  submissions
-                }
-                totalSubmissionNum {
-                  difficulty
-                  count
-                  submissions
-                }
-              }
-              profile {
-                realName
-                userAvatar
-                reputation
-              }
-              submitStats {
-                acSubmissionNum {
-                  difficulty
-                  count
-                }
-              }
-            }
-            userContestRanking(username: $username) {
-              rating
-              globalRanking
-              topPercentage
-              attendedContestsCount
-            }
-          }
-        `;
-
-        const response = await fetch('https://leetcode.com/graphql', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            query: query,
-            variables: { username: 'Ramasubramaniyan123' }
-          })
-        });
-
-        const data = await response.json();
-        
-        if (data.errors) {
-          throw new Error('Failed to fetch LeetCode data');
-        }
-
-        setStats(data.data);
-      } catch (err) {
-        setError(err.message);
-        // Fallback to mock data if API fails
-        setStats({
-          allQuestionsCount: [
-            { difficulty: 'Easy', count: 450 },
-            { difficulty: 'Medium', count: 320 },
-            { difficulty: 'Hard', count: 120 }
-          ],
-          matchedUser: {
-            submitStats: {
-              acSubmissionNum: [
-                { difficulty: 'Easy', count: 420 },
-                { difficulty: 'Medium', count: 280 },
-                { difficulty: 'Hard', count: 95 }
-              ]
-            },
-            profile: {
-              reputation: 1250
-            }
-          },
-          userContestRanking: {
-            rating: 1650,
-            globalRanking: 45000,
-            topPercentage: 15.2,
-            attendedContestsCount: 12
-          }
-        });
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchLeetCodeStats();
-  }, []);
+  const { total, easy, medium, hard, rating, ranking, reputation, topPercentage, attendedContests, loading, error } = useLeetCodeStats();
 
   if (loading) {
     return (
@@ -113,7 +14,7 @@ const LeetCodeStats = () => {
     );
   }
 
-  if (error && !stats) {
+  if (error && !total) {
     return (
       <div className="text-center py-8">
         <p className="text-text-secondary">Unable to load LeetCode stats at the moment.</p>
@@ -121,15 +22,15 @@ const LeetCodeStats = () => {
     );
   }
 
-  const totalSolved = stats?.matchedUser?.submitStats?.acSubmissionNum?.reduce(
-    (sum, item) => sum + item.count, 0
-  ) || 0;
+  // Mock data for allQuestionsCount since it's not in the unified hook
+  const allQuestionsCount = [
+    { difficulty: 'Easy', count: 450 },
+    { difficulty: 'Medium', count: 320 },
+    { difficulty: 'Hard', count: 120 }
+  ];
 
-  const totalQuestions = stats?.allQuestionsCount?.reduce(
-    (sum, item) => sum + item.count, 0
-  ) || 0;
-
-  const solveRate = totalQuestions > 0 ? ((totalSolved / totalQuestions) * 100).toFixed(1) : 0;
+  const totalQuestions = allQuestionsCount.reduce((sum, item) => sum + item.count, 0);
+  const solveRate = totalQuestions > 0 ? ((total / totalQuestions) * 100).toFixed(1) : 0;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -138,7 +39,7 @@ const LeetCodeStats = () => {
         <div className="flex items-center justify-between mb-4">
           <Trophy className="text-yellow-500" size={24} />
           <span className="text-2xl font-bold text-text-primary dark:text-dark-text-primary">
-            {totalSolved}
+            {total}
           </span>
         </div>
         <p className="text-sm text-text-secondary dark:text-dark-text-secondary">Problems Solved</p>
@@ -152,12 +53,12 @@ const LeetCodeStats = () => {
         <div className="flex items-center justify-between mb-4">
           <Target className="text-blue-500" size={24} />
           <span className="text-2xl font-bold text-text-primary dark:text-dark-text-primary">
-            {stats?.userContestRanking?.rating || 'N/A'}
+            {rating || 'N/A'}
           </span>
         </div>
         <p className="text-sm text-text-secondary dark:text-dark-text-secondary">Contest Rating</p>
         <div className="mt-2 text-xs text-primary font-medium">
-          Top {stats?.userContestRanking?.topPercentage?.toFixed(1) || 'N/A'}%
+          Top {topPercentage?.toFixed(1) || 'N/A'}%
         </div>
       </div>
 
@@ -166,12 +67,12 @@ const LeetCodeStats = () => {
         <div className="flex items-center justify-between mb-4">
           <TrendingUp className="text-green-500" size={24} />
           <span className="text-2xl font-bold text-text-primary dark:text-dark-text-primary">
-            {stats?.userContestRanking?.globalRanking?.toLocaleString() || 'N/A'}
+            {ranking?.toLocaleString() || 'N/A'}
           </span>
         </div>
         <p className="text-sm text-text-secondary dark:text-dark-text-secondary">Global Ranking</p>
         <div className="mt-2 text-xs text-primary font-medium">
-          {stats?.userContestRanking?.attendedContestsCount || 0} contests
+          {attendedContests || 0} contests
         </div>
       </div>
 
@@ -180,7 +81,7 @@ const LeetCodeStats = () => {
         <div className="flex items-center justify-between mb-4">
           <Code className="text-purple-500" size={24} />
           <span className="text-2xl font-bold text-text-primary dark:text-dark-text-primary">
-            {stats?.matchedUser?.profile?.reputation || 0}
+            {reputation || 0}
           </span>
         </div>
         <p className="text-sm text-text-secondary dark:text-dark-text-secondary">Reputation</p>
@@ -195,11 +96,9 @@ const LeetCodeStats = () => {
           Problem Solving by Difficulty
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {stats?.allQuestionsCount?.map((item) => {
-            const solved = stats?.matchedUser?.submitStats?.acSubmissionNum?.find(
-              (solved) => solved.difficulty === item.difficulty
-            );
-            const percentage = item.count > 0 ? ((solved?.count || 0) / item.count * 100).toFixed(0) : 0;
+          {allQuestionsCount.map((item) => {
+            const solvedCount = item.difficulty === 'Easy' ? easy : item.difficulty === 'Medium' ? medium : hard;
+            const percentage = item.count > 0 ? ((solvedCount / item.count) * 100).toFixed(0) : 0;
             
             return (
               <div key={item.difficulty} className="space-y-2">
@@ -208,7 +107,7 @@ const LeetCodeStats = () => {
                     {item.difficulty}
                   </span>
                   <span className="text-sm text-text-secondary dark:text-dark-text-secondary">
-                    {solved?.count || 0}/{item.count}
+                    {solvedCount}/{item.count}
                   </span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">

@@ -5,7 +5,7 @@ import Button from './Button';
 const DownloadResume = () => {
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = '/resume.pdf';
+    link.href = import.meta.env.VITE_RESUME_PATH || '/resume.pdf';
     link.download = 'Ramasubramaniyan_K_Resume.pdf';
     document.body.appendChild(link);
     link.click();

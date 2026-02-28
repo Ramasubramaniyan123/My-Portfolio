@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Github, ExternalLink, Code, CheckCircle } from 'lucide-react';
 import SectionTitle from '../components/ui/SectionTitle';
-import Card from '../components/ui/Card';
-import Badge from '../components/ui/Badge';
 import Button from '../components/ui/Button';
 import SocialShare from '../components/ui/SocialShare';
+import ExpandableCard from '../components/ui/ExpandableCard';
 import { projectsData } from '../data/projects.data';
 
 const Projects = () => {
@@ -21,10 +20,19 @@ const Projects = () => {
       });
 
   const ProjectCard = ({ project }) => {
-    const [isExpanded, setIsExpanded] = useState(false);
+    const featuresContent = (
+      <ul className="space-y-1.5 text-sm text-text-secondary animate-fade-in">
+        {project.features.map((feature, idx) => (
+          <li key={idx} className="flex items-start space-x-2">
+            <CheckCircle size={14} className="text-primary mt-0.5 flex-shrink-0" />
+            <span>{feature}</span>
+          </li>
+        ))}
+      </ul>
+    );
 
     return (
-      <div className="bg-white dark:bg-slate-800 rounded-xl border border-border dark:border-slate-700 p-6 transition-all duration-250 hover:shadow-lg hover:border-primary hover:scale-105 hover:-translate-y-1 group flex flex-col h-full">
+      <article className="bg-white dark:bg-slate-800 rounded-xl border border-border dark:border-slate-700 p-6 transition-all duration-250 hover:shadow-lg hover:border-primary hover:scale-105 hover:-translate-y-1 group flex flex-col h-full">
         <div className="space-y-4 flex-grow">
           {/* Project Header */}
           <div className="flex items-start justify-between">
@@ -65,29 +73,16 @@ const Projects = () => {
           </div>
 
           {/* Features */}
-          <div className="space-y-2">
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="flex items-center space-x-2 text-primary hover:text-primary-hover text-sm font-semibold transition-colors"
-            >
-              <Code size={16} className="transition-transform duration-250 group-hover:rotate-[12deg]" />
-              <span>{isExpanded ? 'Hide' : 'Show'} Features</span>
-            </button>
-            
-            {isExpanded && (
-              <ul className="space-y-1.5 text-sm text-text-secondary animate-fade-in">
-                {project.features.map((feature, idx) => (
-                  <li
-                    key={idx}
-                    className="flex items-start space-x-2"
-                  >
-                    <CheckCircle size={14} className="text-primary mt-0.5 flex-shrink-0" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+          <ExpandableCard
+            expandedContent={featuresContent}
+            expandButtonText="Show Features"
+            collapseButtonText="Hide Features"
+            ariaLabel={`Show features for ${project.title}`}
+            contentId={`features-${project.id}`}
+            buttonClassName="flex items-center space-x-2 text-primary hover:text-primary-hover text-sm font-semibold transition-colors"
+          >
+            <Code size={16} className="transition-transform duration-250 group-hover:rotate-[12deg]" />
+          </ExpandableCard>
         </div>
 
         {/* Action Button */}
@@ -103,7 +98,7 @@ const Projects = () => {
             <ExternalLink size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
           </Button>
         </div>
-      </div>
+      </article>
     );
   };
 

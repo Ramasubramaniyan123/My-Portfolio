@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 
 class Particle {
   constructor(x, y) {
@@ -34,6 +35,7 @@ const CursorSmokeEffect = () => {
   const particlesRef = useRef([]);
   const mouseRef = useRef({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     // Check if touch device
@@ -103,9 +105,9 @@ const CursorSmokeEffect = () => {
       window.removeEventListener('resize', checkMobile);
       cancelAnimationFrame(animationId);
     };
-  }, [isMobile]);
+  }, [isMobile, prefersReducedMotion]);
 
-  if (isMobile) return null;
+  if (isMobile || prefersReducedMotion) return null;
 
   return (
     <canvas

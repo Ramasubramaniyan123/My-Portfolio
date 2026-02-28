@@ -24,7 +24,7 @@ const Certifications = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {certificationsData.map((certification) => (
             <Card key={certification.id} className="group">
-              <div className="p-6">
+              <article className="p-6">
                 {/* Header */}
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
@@ -102,7 +102,7 @@ const Certifications = () => {
                     </div>
                   )}
                 </div>
-              </div>
+              </article>
             </Card>
           ))}
         </div>
