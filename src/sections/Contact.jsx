@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, MessageSquare } from 'lucide-react';
 import SectionTitle from '../components/ui/SectionTitle';
 import Card from '../components/ui/Card';
@@ -6,12 +6,23 @@ import Button from '../components/ui/Button';
 import { useForm } from '../hooks/useForm';
 
 const Contact = () => {
-  const { values: formData, isSubmitting, submitStatus, handleChange, handleSubmit } = useForm({
+  const handleSubmit = async (formData) => {
+    // Simulate form submission
+    console.log('Form submitted:', formData);
+    
+    // In a real application, you would send this data to your backend
+    // For now, we'll just simulate a successful submission
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // You could also integrate with email services like EmailJS, Formspree, etc.
+  };
+
+  const { values: formData, isSubmitting, submitStatus, handleChange, handleSubmit: handleFormSubmit } = useForm({
     name: '',
     email: '',
     subject: '',
     message: ''
-  });
+  }, handleSubmit);
 
   const contactInfo = [
     {
@@ -128,7 +139,7 @@ const Contact = () => {
           {/* Contact Form */}
           <div>
             <Card className="h-full bg-background">
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleFormSubmit} className="space-y-6">
                 <div>
                   <h3 className="text-2xl font-bold text-text-primary dark:text-white mb-6">Send a Message</h3>
                 </div>
@@ -222,8 +233,13 @@ const Contact = () => {
 
                 {/* Submit Status */}
                 {submitStatus === 'success' && (
-                  <div className="p-4 bg-accent-primary/10 border border-accent-primary/30 rounded-lg text-accent-primary text-sm text-center">
+                  <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg text-green-700 dark:text-green-300 text-sm text-center">
                     Thank you for your message! I'll get back to you soon.
+                  </div>
+                )}
+                {submitStatus === 'error' && (
+                  <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-300 text-sm text-center">
+                    Oops! Something went wrong. Please try again later.
                   </div>
                 )}
               </form>
